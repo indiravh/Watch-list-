@@ -5,7 +5,8 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
-  end
+    @bookmark = Bookmark.new
+    end
 
   def new
     @list = List.new
@@ -19,6 +20,13 @@ class ListsController < ApplicationController
       render :new
     end
   end
+
+   def destroy
+    @list = List.find(params[:id])
+    @list.destroy
+    redirect_to lists_path
+  end
+
 
   private
 
