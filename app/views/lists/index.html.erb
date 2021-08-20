@@ -3,11 +3,19 @@
     <div class="col-xs-12 col-sm-10 col-sm-offset-1">
 
  <h1>All lists</h1>
+ <%= cl_image_tag("s7fjmrrhc9bh6hebw3uy",
+      width: 400, height: 300, crop: :fill) %>
+
       <ul class="list-group">
         <% @lists.each do |list| %>
           <li class="list-group-item">
             <%= link_to list.name, list_path(list) %>
-            <%= link_to "See details", list_path(list), class: "btn btn-primary"%>
+            <%= link_to "See details", list_path(list), class: "btn btn-flat"%>
+            <% if list.photo.attached? %>
+            <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path list.photo.key, height: 300, crop: :fill %>')">
+            Cool article
+            </div>
+            <% end %>
           </li>
         <% end %>
       </ul>

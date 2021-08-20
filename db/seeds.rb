@@ -50,3 +50,7 @@ Movie.create(
   poster_url: "https://image.tmdb.org/t/p/w500/#{movie['results'][0]['poster_path']}",
   rating: movie['results'][0]['vote_average']
 )
+
+file = URI.open('https://giantbomb1.cbsistatic.com/uploads/original/9/99864/2419866-nes_console_set.png')
+list = List.new(name: 'TEST')
+list.photo.attach(io: file, filename: 'test.png', content_type: 'image/png')
