@@ -5,16 +5,48 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-require 'faker'
+# require 'faker'
 require 'json'
 require 'open-uri'
 
-# # If I want to Parse the API's images, use text below 👇 and replace poster_url:
-  # base_url = 'http://tmdb.lewagon.com/movie/top_rated'
-  # user_serialized = URI.open(base_url).read
-  # user = JSON.parse(user_serialized)
+puts "Cleaning up database..."
+Bookmark.destroy_all #first destroy child = bookmark
+Movie.destroy_all
+puts "Database cleaned"
 
-Movie.create(title: Faker::Movie.title, overview: Faker::Quote.famous_last_words, poster_url: "https://image.tmdb.org/t/p/w500//loRmRzQXZeqG78TqZuyvSlEQfZb.jpg" , rating: rand(11))
-Movie.create(title: Faker::Movie.title, overview: Faker::Quote.famous_last_words, poster_url: "https://image.tmdb.org/t/p/w500//5ZjMNJJabwBEnGVQoR2yoMEL9um.jpg" , rating: rand(11))
-Movie.create(title: Faker::Movie.title, overview: Faker::Quote.famous_last_words, poster_url: "https://image.tmdb.org/t/p/w500//poec6RqOKY9iSiIUmfyfPfiLtvB.jpg" , rating: rand(11))
-Movie.create(title: Faker::Movie.title, overview: Faker::Quote.famous_last_words, poster_url: "https://image.tmdb.org/t/p/w500//hek3koDUyRQk7FIhPXsa6mT2Zc3.jpg" , rating: rand(11))
+
+# # If I want to Parse the API's images, use text below 👇 and replace poster_url:
+  base_url = 'http://tmdb.lewagon.com/movie/top_rated'
+  movie_serialized = URI.open(base_url).read
+  movie = JSON.parse(movie_serialized)
+
+Movie.create(
+  title: movie['results'][0]['title'],
+  overview: movie['results'][0]['overview'],
+  poster_url: "https://image.tmdb.org/t/p/w500/#{movie['results'][0]['poster_path']}",
+  rating: movie['results'][0]['vote_average']
+)
+Movie.create(
+  title: movie['results'][1]['title'],
+  overview: movie['results'][1]['overview'],
+  poster_url: "https://image.tmdb.org/t/p/w500/#{movie['results'][1]['poster_path']}",
+  rating: movie['results'][1]['vote_average']
+)
+Movie.create(
+  title: movie['results'][2]['title'],
+  overview: movie['results'][2]['overview'],
+  poster_url: "https://image.tmdb.org/t/p/w500/#{movie['results'][2]['poster_path']}",
+  rating: movie['results'][2]['vote_average']
+)
+Movie.create(
+  title: movie['results'][3]['title'],
+  overview: movie['results'][3]['overview'],
+  poster_url: "https://image.tmdb.org/t/p/w500/#{movie['results'][3]['poster_path']}",
+  rating: movie['results'][4]['vote_average']
+)
+Movie.create(
+  title: movie['results'][0]['title'],
+  overview: movie['results'][0]['overview'],
+  poster_url: "https://image.tmdb.org/t/p/w500/#{movie['results'][0]['poster_path']}",
+  rating: movie['results'][0]['vote_average']
+)
