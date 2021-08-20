@@ -5,7 +5,7 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
-    @bookmark = Bookmark.new # why?
+    @bookmark = Bookmark.new # initiate the form on the same page of the show
     end
 
   def new
